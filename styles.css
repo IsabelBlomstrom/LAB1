@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    background-color: cornflowerblue;
+    }
+
+div {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    margin: 2rem;
+}
+
