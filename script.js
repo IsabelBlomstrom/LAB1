@@ -1,85 +1,100 @@
 
+const gameState = {
+  hasFoundKey: false,
+  hasFoundSmallKey: false,
+}
+
 function spelaSpel() {
-    let name = prompt('Vad heter du?')
-    let choice1 = prompt('Hej ' + name + '! Du vaknar plötsligt av ljudet av en nyckel som vrids om. I rummet ser du en byrå och en växt. Vill du utforska byrån eller växten?');
+    alert('Välkommen till The Escape From Madness!')
+  
+    alert('Du vaknar till ljudet av en nyckel som vrids om. När du sätter dig upp ser du att det i rummet finns en byrå och en växt.');
 
+    let decision;
+    let decision2;
+    let decision3;
+    let decision4;
+  
+    
+    let utforska = prompt('Vad vill du utforska, byrån eller växten?').toLowerCase()  
+    
+    
+    
+    if (utforska === "byrån" || utforska === "byrå" && gameState.hasFoundSmallKey) {
+      byrån()
+    } else if (utforska === "växten" || utforska === "växt") {
+      hasFoundSmallKey = true
+      växten()
+    } else {
+        alert("Du har ingen nyckel till byrån.")
+        spelaSpel()
+    }
+  
+  
+    function byrån() {
+      alert("I byråns översta låda hittar du en kofot.");
+      decision = prompt("Vill du försöka bryta upp dörren?").toLowerCase();
 
-
-    if (choice1 === 'byrån' || 'byrå') {
-
-        alert('Du försöker öppna byrån men den är låst.')
-        choice2 = prompt('Vill du gå till växten?')
+      if(decision === "ja") {
+        hallway();
+      } else {
+        alert("du dog")
+        
+      }
+    }
     
 
-     if (choice2 === 'ja') {
-         alert('Du lyfter upp växten och hittar en liten nyckel')
-     }
-     else if (choice2 === 'nej') {
-         alert('Vetenskapsmannen kom tillbaka och fortsatte experimentera på dig')
-     }
-     }
+  
+    function växten() {
+      alert("Du kikar ner i jorden och ser att där ligger en nyckel.");
+      decision2 = prompt("Vill du gå till byrån?").toLowerCase();
 
-    else if (choice1 === 'växt' || 'växten') {
-        alert('du lyfter upp växten')
-        let choice2 = prompt('Vill du lyfta upp växten?')
-
-
-        if (choice2 === 'ja') {
-            alert('Du lyfter upp växten och hittar en liten nyckel')
-        }
-        else if (choice2 === 'nej') {
-            alert('Du är för långsam på detta och vetenskapsmannen kom tillbaka och fortsatte experimentera på dig')
-        }
+      if(decision2 === "ja") {
+        byrån()
+      } else {
+        alert("Det var ett dåligt beslut. Du har blivit inlåst av en galen vetenskapsman som \
+har experimenterat på dig och nu kommer han tillbaka.\
+")
+      }
     }
+  
 
+    function hallway() {
+      alert("Du är i stora hallen. Här finns en stor ytterdörr med fingeravtryckslås, ett akvarium och en till dörr.")
+      decision3 = prompt("Vill du gå till ytterdörren, akvariumet eller lilla dörren?").toLowerCase()
 
-    else {
-        alert('Du väntade för länge med att göra något så du dog.')
+      if(decision3 === "ytterdörren" || decision3 === "ytterdörr") {
+        alert("Ytterdörren är låst och ditt finger kan inte låsa upp den")
+        hallway()
+      } else if(decision3 === "akvarium" || decision3 === "akvariumet") {
+        gameState.hasFoundKey = true
+        alert("Du stoppar ner handen och ser en piraya. Snabbt fiskar du upp den lilla skattkistan, däri ligger en nyckel..")
+        hallway()
+      } else if(decision3 === "lilla dörren" || decision3 === "liten dörr" || decision3 === "dörren") {
+        salongen() 
+      }
     }
+  
+    function salongen() {
+      alert("När du kommer in i salongen hittar du en butler fastkedjad vid en stol.")
+      decision4 = prompt("Vill du försöka hjälpa butlern att komma loss?").toLowerCase()
+
+      if(decision4 === "ja" && gameState.hasFoundKey) {
+        alert("Du hjälper butlern att komma loss och han är mycket tacksam. Han berättar att en galen\
+ vetenskapsman har experimenterat på dig, men nu ska han hjälpa dig att komma ut. Han tar dig med\
+ tillbaka ut i stora hallen och håller sitt finger på avläsaren. Det klickar till och dörren öppnas.\
+ Du är FRI!")
+
+      } else if(decision4 === "nej") {
+        alert("Plötsligt stormar en galen vetenskapsman in. Han har experimenterat på dig en tid \
+och är väldigt sugen på att fortsätta. Du blir inlåst i rummet igen. Karma.")
+      }
+      
+      else {
+        alert("Du har ingen nyckel som passar till låset")
+        hallway()
+      }
+    }
+  
+  
 }
-
-
-
-
-
-
-
-
-
-//MIN URSPRUNGLIGA KOD!!!
-
-/*if(wakeUp == true) {
-    alert('Du bestämmer dig för att utforska rummet')
-    let utforskaRum1 = prompt('Vad vill du utforska först? Dörr, byrå eller växt?').toLowerCase();
-
-   if(utforskaRum1 == 'Dörr'.toLowerCase()); {
-    alert('Dörren är låst, efter en stund kommer vetenskapsmannen tillbaka och fortsätter experimentera på dig..');
-   }
-
-    else if(utforskaRum1 == 'Byrå'.toLowerCase()); {
-    alert('Byrån är låst och du dog');
-    }
-
-     else (utforskaRum1 == 'växt'.toLowerCase()); {
-        alert('Du lyfter upp växten och hittar en nyckel');
-        prompt('vad vill du utforska nu? (dörr, byrå)');
-    }
-}
-
-
-if(utforskaRum1 == 'Byrå'.toLowerCase()) {
-    alert('Byrån är låst');
-    prompt('Vad vill du utforska nu? (Växt, dörr)')
-    if(utforskaRum1 == 'Dörr'.toLowerCase());{
-    alert('Dörren är låst');
-    }
-    if(utforskaRum1 == 'växt') {
-        alert('Du lyfter upp växten och hittar en nyckel');
-    }
-}
-
-
-else {
-    alert('Du har varit utsatt för flera experiment och snart kommer vetenskapsmannen tillbaka för att fortsätta. Lycka till med det!');
-}
-*/
+    
